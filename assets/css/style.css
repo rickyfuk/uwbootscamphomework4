@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+}
+
+/* header styling */
+
+header .container{
+    background-color: #7952b3;   
+    max-width:100%!important; 
+    color : whitesmoke;
+}
+
+header h1{
+    font-size: 2em!important;
+}
+
+/* main body styling */
+main h1{
+    font-size: 2rem!important;
+}
+
+main .btn-outline-primary{
+    color:#7952b3!important;
+    border-color: #7952b3!important;
+
+}
+
+main .btn-outline-primary:hover{
+    color:#fff!important;
+    border-color: #7952b3!important;
+    background-color: #7952b3!important;
+}
+
+main .btn-outline-primary:active{
+    color:#fff!important;
+    border-color: #7952b3!important;
+    background-color: #7952b3!important;
+}
+
+main .btn-outline-primary:focus{
+    box-shadow:0 0 0 0.2rem rgba(225, 155, 250, 0.7)!important;
+}
