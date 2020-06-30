@@ -19,6 +19,9 @@ var choiceList = document.getElementById("choiceList");
 var i = 0; 
 // locate the user choice for the questions
 var userChoice = document.getElementsByClassName("userChoice");
+// checker for the true/false with the user response
+var ansChecker = true ; 
+
 
 
 
@@ -47,51 +50,15 @@ function countDownExecute(){
 function questionLoop(){
 
         addQuestion(i);
-    // if (i<5){
-    //     // add the question number on the question heading
-    //     questionNum.textContent = "Question " + (i+1);
-    //     // add the question title content
-    //     questionTitle.textContent = questions[i].title;
-    //     // add the answer choice
-    //     for (j=0; j<questions[i].choices.length; j++){
-    //         var li = document.createElement("li");
-    //         var choiceBtn = document.createElement("button");
-    //         // create a list item with a button inside for displaying the selection
-    //         choiceBtn.textContent = questions[i].choices[j];    
-    //         choiceBtn.setAttribute("class","userChoice mb-3 btn btn-outline-primary");            
-    //         choiceList.appendChild(li);
-    //         li.appendChild(choiceBtn);
-    //     }
         showQuestionBody();
-        checkAnswer();
-        // // add eventListener for getting the user response
-        // // locate the user choice for the questions
-        // var userChoice = document.getElementsByClassName("userChoice");
-        // userChoice.addEventListener()("click",function(event){
-        //     event.preventDefault();
-        //     var userSelect = event.target;
-        //     // check if the selection is a button
-        //     if (userSelect.matches("button") === true){
-        //         // check if the selection match with the correct answer
-        //         if (userSelect.textContent.matches(questions[i].answer) === true){
-        //             var feedback = document.createElement("p");
-        //             feedback.textContent = "Correct"
-        //             li.appendChild(feedback);
-        //         }
-        //         else {
-        //             feedback.textContent = "Wrong! The coorect answer is " + questions[i].answer;
-        //             li.appendChild(feedback); 
-        //         }
-        //     }      
-        // }
-        // )
+        checkAnswer(i);
         i++;
           
     
 
 }
 
-// function 3.1 - add the question layout
+// function 3.1 - add the question content
 function addQuestion(i){
     if (i<5){
         // add the question number on the question heading
@@ -109,36 +76,43 @@ function addQuestion(i){
             li.appendChild(choiceBtn);
         }
     }   
-    console.log(userChoice);
-    // return(userChoice);
 }
 
 // function 3.2  - check the user response with the answer
-function checkAnswer(){
+function checkAnswer(i){
     // add eventListener for getting the user response
         // locate the user choice for the questions
-        // var userChoice = document.getElementsByClassName("userChoice");
-        for(var k = 0; k < userChoice.length; k++) {
-                userChoice[k].addEventListener()("click",function(event){
-                    var userSelect = event.target;
-                    // check if the selection is a button
-                    if (userSelect.matches("button") === true){
-                        event.preventDefault();
-                        // check if the selection match with the correct answer
-                        if (userSelect.textContent.matches(questions[i].answer) === true){
-                            var feedback = document.createElement("p");
-                            feedback.textContent = "Correct"
-                            li.appendChild(feedback);
-                        }
-                        else {
-                            feedback.textContent = "Wrong! The coorect answer is " + questions[i].answer;
-                            li.appendChild(feedback); 
-                        }
-                    }      
-                }
-                )
+        // var userChoice = document.getElementsByClassName("userChoice"); 
+        for(k = 0; k < userChoice.length; k++) {
+                userChoice[k].addEventListener("click",function(event) {matchResponseToAnswer(event,k,i)});
+                userChoice[k].removeEventListener("click",function(event) {matchResponseToAnswer(event,k,i)});
         }
-            
+}
+
+// check if the answer if ture or false
+function matchResponseToAnswer(event,k,i){
+    event.preventDefault();
+    var userSelect = event.target;
+    console.log(event);
+    console.log(questions[i]);
+    console.log(userSelect);
+    // check if the selection is a button
+    if (userSelect.matches("button") === true){
+        // add a paragraph p element name as feedback
+        var feedback = document.createElement("p");
+        // add an list element name as li
+        var li = document.createElement("li");
+        // check if the selection match with the correct answer
+        if (userSelect.textContent === questions[i].answer){
+            feedback.textContent = "Correct"
+        }
+        else {
+            feedback.textContent = "Wrong! The correct answer is " + questions[i].answer;
+
+        }
+    choiceList.appendChild(li);
+    li.appendChild(feedback);
+    }      
 }
 
 

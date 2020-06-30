@@ -39,4 +39,7 @@ main .btn-outline-primary:active{
 
 main .btn-outline-primary:focus{
     box-shadow:0 0 0 0.2rem rgba(225, 155, 250, 0.7)!important;
+    color:#fff!important;
+    border-color: #7952b3!important;
+    background-color: #7952b3!important;
 }
