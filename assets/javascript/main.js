@@ -2,6 +2,10 @@
 var mainBody = document.getElementById("initialBody");
 // locate the question body
 var questionBody =  document.getElementById("questionBody");
+// locate the result body
+var resultBody =  document.getElementById("resultBody");
+// locate the viewhighscore body
+var viewHighScoreBody =  document.getElementById("viewHighScoreBody");
 // locate the "Start Quiz Button"
 var startQuizBtn = document.querySelector("#startQuiz");
 // set the value for the current question
@@ -22,11 +26,24 @@ var secondLeft = 100;
 var feedback = document.createElement("p");
 // add an list element name as li
 var feedbackli = document.createElement("li");
+// locate the result heading (h1)
+var resultHead = document.getElementById("resultHead");
+// locate the result content - show score (p)
+var resultMain = document.getElementById("resultMain");
+// locate the result input for initial (<input>)
+var resultInput = document.getElementById("resultInput");
+// locate the result submit button (button)
+var resultSubmit = document.getElementById("resultSubmit");
+// locate the result message (div for error input message)
+var resultMessage = document.getElementById("resultMessage");
 
 // default setting
-// hide question (function 0)
+// hide question body (function 0)
 hideQuestionBody();
-
+// hide result body (function 11)
+hideResultBody();
+// show main body (function 13)
+showMainBody();
 // when the start quiz button pressed run:
 // 1.function startQuiz (function 1)
 // 2.function addListerertoMain (function 9)
@@ -41,8 +58,8 @@ function hideQuestionBody(){
 
 // function 1 - start game
 function startQuiz(){
-    // clear the first page (function 2)
-    clearMainBody();
+    // clear the landing page (function 2)
+    hideMainBody();
     // start the countdown (function 8)
     countSecondLeft();
     // set time interval for every 1 sec to run function 8 once 
@@ -55,7 +72,7 @@ function startQuiz(){
 }
 
 // function 2 - hide the body content
-function clearMainBody(){
+function hideMainBody(){
     mainBody.setAttribute ("style", "display:none;");
 }
 
@@ -84,6 +101,7 @@ function resetQuestion(){
 
 // function 6 - bulid in the content to the question
 function questionBuilder(questionCount){
+    if (questionCount<5){
     // add the question number on the question heading
     questionNum.textContent = "Question " + (questionCount+1);
     // add the question title content
@@ -98,6 +116,7 @@ function questionBuilder(questionCount){
         choiceBtn.setAttribute("class","userChoice mb-3 btn btn-outline-primary");            
         choiceList.appendChild(li);
         li.appendChild(choiceBtn);
+    }
     }
 }
 
@@ -127,14 +146,16 @@ function chooseAns(){
 function countSecondLeft (){
     secondLeft--;
     timer.textContent = "Time : " + Math.max(0,secondLeft);
-
+    // when time is up or no more question
     if (secondLeft <= 0 || currentQues>4){
+        // clear interval - stop counting down
         clearInterval(timeInterval);
-        // hideQuestionBody();
-        // showMainBody();
-        // add a function to display the result
-        // displayResult ();
+        // hide the question body (function 0)
+        hideQuestionBody();
+        // show the result body (function 12)
+        showResultBody();
     }
+    // else continue to count down (no action)
 }
 
 // function 9 - add lisetner
@@ -161,4 +182,71 @@ function returnFeedback(){
     choiceList.removeEventListener("click", chooseAns);
     // return to addListenToMain function to resume the click event after half sec
     setTimeout(addListererToMain,500);
+}
+
+// function 11 - hide the result body content
+function hideResultBody(){
+    resultBody.setAttribute ("style", "display:none;");
+}
+
+// function 12 - show the result body content
+function showResultBody(){
+    // build the score result body (function 14)
+    showScoreResult();
+    // show the result body
+    resultBody.setAttribute ("style", "display:block;");
+}
+
+// function 13 - show the body content
+function showMainBody(){
+    mainBody.setAttribute ("style", "display:block;");
+}
+
+// function 14 - set up the Result body content
+function showScoreResult(){
+    // display the result heading
+    // if the quiz end due to time equal to 0 => show Time up
+    if (secondLeft <= 0 ){
+        resultHead.textContent = "Time Up!"
+    }
+    else{
+        // if the quiz end due to all question completed => show All done  
+        resultHead.textContent = "All done!"
+    }
+    // display the result body
+    score = Math.max(0,secondLeft);
+    resultMain.textContent = "Your final score is " + score;
+
+    resultSubmit.addEventListener("click", function(event) {
+        event.preventDefault();
+    
+        // create an object to store the result
+        var playerResult = {
+            playerinitial :resultInput.value.trim(),
+            playerScore : score,
+        };
+
+        // validate the input
+        if (playerResult.playerinitial === ""){
+            displayMessage("errorResultMessage","Please input your initial");
+        }
+        else {
+            displayMessage("successResultMessage","Thanks for playing");
+        }
+
+        // set new submission
+        localStorage.setItem("playerResult", JSON.stringify(playerResult));
+    });
+    resultSubmit.addEventListener("click", function(){
+        setTimeout(function(){
+        hideResultBody;
+        },500);
+    });
+
+}
+
+// function 15 - display the message for the input
+function displayMessage(type, message) {
+    resultMessage.textContent = message;
+    resultMessage.setAttribute("class", type);
 }

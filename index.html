@@ -105,23 +105,22 @@
             <!-- 1st row -->
             <div class="row">
                 <div class="col-12 offset-md-2 col-md-8 text-center text-md-left">
-                    <h1 class="display-4">
-                        All done
+                    <h1 id="resultHead" class="display-4">
                     </h1>
                     <!-- 2nd row (nested inside 1st row)-->
                     <div class="row pt-3 ">
                         <div class="col-12 text-center justify-content-center text-md-left">
-                            <p class="pb-3">
-                               Your final score is xxx.
+                            <p id="resultMain" class="pb-3">
                             </p>
                             <!-- 3rd row (nested inside 2nd row) -->
                             <div class="row">
                                 <div class="col-12 pb-3 text-left col-md-7 d-md-inline">
                                     Enter initial 
-                                    <input type="text" class="nameinput form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input type="text" id="resultInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g. JJ (for Jane Joe)">
+                                    <div id="resultMessage"></div>
                                 </div>  
                                 <div class="col-12 pb-3 text-center justify-content-center mx-md-0 px-md-2 col-md-2">
-                                    <button class="highScore btn btn-outline-primary">Submit</button>
+                                    <button id="resultSubmit" class="btn btn-outline-primary">Submit</button>
                                 </div>
                             </div>
                         </div>

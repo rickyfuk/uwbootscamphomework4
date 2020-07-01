@@ -53,11 +53,22 @@ main .userChoice{
 }
 
 /* Score body styling */
+main #resultMessage{
+    font-style: italic;
+    font-weight: bold;
+}
 
+main .errorResultMessage{
+    color: rgb(210, 90, 90);
+}
+
+main .successResultMessage{
+    color: rgb(90, 200, 90);
+}
 
 @media screen and (min-width: 600px){
 
-main .nameinput{
+main #resultInput{
     display: inline!important;
     width:70%!important;
 }    
