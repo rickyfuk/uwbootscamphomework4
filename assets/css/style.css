@@ -14,7 +14,7 @@ header h1{
     font-size: 2em!important;
 }
 
-header .timer{
+header #timer{
     font-size: 3rem!important;
 }
 /* main body styling */
@@ -45,4 +45,9 @@ main .btn-outline-primary:focus{
     color:#fff!important;
     border-color: #7952b3!important;
     background-color: #7952b3!important;
+}
+
+main .userChoice{
+    text-align: justify;
+    width:100%;
 }
