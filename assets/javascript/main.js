@@ -23,8 +23,13 @@ var feedback = document.createElement("p");
 // add an list element name as li
 var feedbackli = document.createElement("li");
 
-
+// default setting
+// hide question (function 0)
 hideQuestionBody();
+
+// when the start quiz button pressed run:
+// 1.function startQuiz (function 1)
+// 2.function addListerertoMain (function 9)
 startQuizBtn.addEventListener("click", startQuiz); 
 addListererToMain();
 
@@ -36,11 +41,16 @@ function hideQuestionBody(){
 
 // function 1 - start game
 function startQuiz(){
+    // clear the first page (function 2)
     clearMainBody();
+    // start the countdown (function 8)
     countSecondLeft();
+    // set time interval for every 1 sec to run function 8 once 
     timeInterval = setInterval(countSecondLeft,1000);
     currentQues = 0;
+    // show the question (function 3)
     showQuestionBody();
+    // show the question content (function 4)
     nextQuestion();
 }
 
@@ -54,9 +64,11 @@ function showQuestionBody(){
     questionBody.setAttribute ("style", "display:block;");
 }
 
-// function 4 - set up for the next question
+// function 4 - set up for the next question content
 function nextQuestion(){
+    // clear all the previous quesions content and choice (function 5) 
     resetQuestion();
+    // build the question content (function 6)
     questionBuilder(currentQues);
 }
 
@@ -97,13 +109,16 @@ function chooseAns(){
     if (userChoice === correctAns){
             console.log("true case have been run") // can delete when complete (checking)
             feedback.textContent = "Correct"
+            // run the feedback function (function 10)
             returnFeedback();
             return;
     }
     else {
             console.log("false case have been run") // can delete when complete (checking)
             feedback.textContent = "Wrong! The correct answer is " + questions[currentQues].answer;
+            // run the feedback function (function 10)
             returnFeedback();
+            // reduce the time with 10 seconds
             return secondLeft -= 10; 
     }
 }
@@ -124,11 +139,15 @@ function countSecondLeft (){
 
 // function 9 - add lisetner
 function addListererToMain(){
+        // start or resume the click event listener to proceed with chooseAns function 
+        // (function 7)
         choiceList.addEventListener("click", chooseAns);
+        // start or resume the click event listener to proceed with next question
+        // delay the function for half sec to let the user read the correct / wrong response
         choiceList.addEventListener("click", function(){
             setTimeout(function(){
             nextQuestion();
-            },1000);
+            },500);
         });
 }
 
@@ -136,7 +155,10 @@ function addListererToMain(){
 function returnFeedback(){
     choiceList.appendChild(feedbackli);
     feedbackli.appendChild(feedback);
+    // add 1 to the question counter
     currentQues++;
+    // freeze the click function and so the click will not active after the choice is made
     choiceList.removeEventListener("click", chooseAns);
-    setTimeout(addListererToMain,1000);
+    // return to addListenToMain function to resume the click event after half sec
+    setTimeout(addListererToMain,500);
 }

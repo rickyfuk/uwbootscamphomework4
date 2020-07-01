@@ -14,6 +14,9 @@ header h1{
     font-size: 2em!important;
 }
 
+header .timer{
+    font-size: 3rem!important;
+}
 /* main body styling */
 main h1{
     font-size: 2rem!important;
