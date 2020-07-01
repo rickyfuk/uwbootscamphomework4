@@ -42,6 +42,7 @@
         </div>
     </header>
     <main>
+        <!-- landing page body -->
         <div id = "initialBody" class="container pt-5 mt-md-5" >
             <!-- 1st row -->
             <div class="row">
@@ -69,6 +70,7 @@
                 </div>
             </div>
         </div>
+        <!-- question body -->
         <div id = "questionBody" class="container pt-5 mt-md-5">
             <!-- 4th row (1st row of question body) -->
             <div class="row">
@@ -93,6 +95,61 @@
                     <div class = "row">
                         <div class="col-12 pb-3 text-right">
                             <button class="highScore btn btn-outline-primary">View Highscore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Result body -->
+        <div id = "resultBody" class="container pt-5 mt-md-5" >
+            <!-- 1st row -->
+            <div class="row">
+                <div class="col-12 offset-md-2 col-md-8 text-center text-md-left">
+                    <h1 class="display-4">
+                        All done
+                    </h1>
+                    <!-- 2nd row (nested inside 1st row)-->
+                    <div class="row pt-3 ">
+                        <div class="col-12 text-center justify-content-center text-md-left">
+                            <p class="pb-3">
+                               Your final score is xxx.
+                            </p>
+                            <!-- 3rd row (nested inside 2nd row) -->
+                            <div class="row">
+                                <div class="col-12 pb-3 text-left col-md-7 d-md-inline">
+                                    Enter initial 
+                                    <input type="text" class="nameinput form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>  
+                                <div class="col-12 pb-3 text-center justify-content-center mx-md-0 px-md-2 col-md-2">
+                                    <button class="highScore btn btn-outline-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- View Highscore body -->
+        <div id = "viewHighScoreBody" class="container pt-5 mt-md-5" >
+            <!-- 1st row -->
+            <div class="row">
+                <div class="col-12 offset-md-2 col-md-8 text-center">
+                    <h1 class="display-4">
+                        Highest Score
+                    </h1>
+                    <!-- 2nd row (nested inside 1st row)-->
+                    <div class="row pt-3 ">
+                        <div class="col-12 text-center justify-content-center text-justify">
+                            <ul id="highscoreList" class="pb-3"></ul>
+                            <!-- 3rd row (nested inside 2nd row) -->
+                            <div class="row">
+                                <div class="col-12 pb-3 text-center justify-content-center col-md-6">
+                                    <button id="goBack" class="btn btn-outline-primary">Go Back</button>
+                                </div>
+                                <div class="col-12 pb-3 text-center justify-content-center col-md-6">
+                                    <button id="clearRecord" class="btn btn-outline-primary">Clear Highest score</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -51,3 +51,14 @@ main .userChoice{
     text-align: justify;
     width:100%;
 }
+
+/* Score body styling */
+
+
+@media screen and (min-width: 600px){
+
+main .nameinput{
+    display: inline!important;
+    width:70%!important;
+}    
+}
