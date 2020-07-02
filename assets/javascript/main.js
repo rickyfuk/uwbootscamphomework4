@@ -36,6 +36,8 @@ var resultInput = document.getElementById("resultInput");
 var resultSubmit = document.getElementById("resultSubmit");
 // locate the result message (div for error input message)
 var resultMessage = document.getElementById("resultMessage");
+// set an empty array for storing the player result
+var playerResultArray = [];
 
 // default setting
 // hide question body (function 0)
@@ -49,7 +51,6 @@ showMainBody();
 // 2.function addListerertoMain (function 9)
 startQuizBtn.addEventListener("click", startQuiz); 
 addListererToMain();
-
 
 // function 0 - hide the question content
 function hideQuestionBody(){
@@ -203,6 +204,7 @@ function showMainBody(){
 }
 
 // function 14 - set up the Result body content
+// (show the result and get the name for the player to store it to local storage)
 function showScoreResult(){
     // display the result heading
     // if the quiz end due to time equal to 0 => show Time up
@@ -213,33 +215,16 @@ function showScoreResult(){
         // if the quiz end due to all question completed => show All done  
         resultHead.textContent = "All done!"
     }
-    // display the result body
+    // display the result body (only show 0 as minimun)
     score = Math.max(0,secondLeft);
     resultMain.textContent = "Your final score is " + score;
-
-    resultSubmit.addEventListener("click", function(event) {
-        event.preventDefault();
-    
-        // create an object to store the result
-        var playerResult = {
-            playerinitial :resultInput.value.trim(),
-            playerScore : score,
-        };
-
-        // validate the input
-        if (playerResult.playerinitial === ""){
-            displayMessage("errorResultMessage","Please input your initial");
-        }
-        else {
-            displayMessage("successResultMessage","Thanks for playing");
-        }
-
-        // set new submission
-        localStorage.setItem("playerResult", JSON.stringify(playerResult));
-    });
+    // after the submit button is press => go to get player initial (function 18)
+    resultSubmit.addEventListener("click", getPlayerInitial) 
+    // after half sec the submit button is press => hide Result boay and show highscore body
     resultSubmit.addEventListener("click", function(){
         setTimeout(function(){
-        hideResultBody;
+            hideResultBody();
+        // display the highscore body (function not build yet)
         },500);
     });
 
@@ -250,3 +235,46 @@ function displayMessage(type, message) {
     resultMessage.textContent = message;
     resultMessage.setAttribute("class", type);
 }
+
+// function 16 - store the result to local storage
+function saveToLocal(){
+    localStorage.setItem("playerResultArray", JSON.stringify(playerResultArray));
+}
+
+// function 17 - load the previous data from local storage
+function loadFromLocal(){
+    var storedResult = JSON.parse(localStorage.getItem("playerResultArray"));
+    if (storedResult !== null) {
+        playerResultArray = storedResult;
+
+}
+}
+
+// function 18 - get the initial from the player
+function getPlayerInitial(){
+    event.preventDefault();
+    
+    // create an object to store the result
+    var playerResult = {
+        playerinitial :resultInput.value.trim(),
+        playerScore : score,
+    };
+
+    // load the result from local storage
+    loadFromLocal();
+
+    // make sure the player input some string in the form
+    if (playerResult.playerinitial === ""){
+        displayMessage("errorResultMessage","Please input your initial");
+    }
+    else {
+        displayMessage("successResultMessage","Thanks for playing");
+    }
+    // add the initial and result to the playerResultArray
+    playerResultArray.push(playerResult);
+    // save the new array into the local storage
+    saveToLocal();
+    // remove the event listener to freeze the button to add further result
+    resultSubmit.removeEventListener("click", getPlayerInitial);
+}
+
