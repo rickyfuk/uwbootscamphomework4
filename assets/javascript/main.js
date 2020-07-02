@@ -44,6 +44,8 @@ var playerResultArray = [];
 hideQuestionBody();
 // hide result body (function 11)
 hideResultBody();
+// hide highscore body (function 19)
+hideHighScoreBody();
 // show main body (function 13)
 showMainBody();
 // when the start quiz button pressed run:
@@ -223,8 +225,10 @@ function showScoreResult(){
     // after half sec the submit button is press => hide Result boay and show highscore body
     resultSubmit.addEventListener("click", function(){
         setTimeout(function(){
+            // hide the result body (function 11)
             hideResultBody();
-        // display the highscore body (function not build yet)
+            // show high score body (function 20)
+            showHightScoreBody();
         },500);
     });
 
@@ -252,17 +256,14 @@ function loadFromLocal(){
 
 // function 18 - get the initial from the player
 function getPlayerInitial(){
-    event.preventDefault();
-    
+    event.preventDefault();  
     // create an object to store the result
     var playerResult = {
         playerinitial :resultInput.value.trim(),
         playerScore : score,
     };
-
     // load the result from local storage
     loadFromLocal();
-
     // make sure the player input some string in the form
     if (playerResult.playerinitial === ""){
         displayMessage("errorResultMessage","Please input your initial");
@@ -278,3 +279,23 @@ function getPlayerInitial(){
     resultSubmit.removeEventListener("click", getPlayerInitial);
 }
 
+// function 19 - hide the highscore body content
+function hideHighScoreBody(){
+    viewHighScoreBody.setAttribute ("style", "display:none;");
+}
+
+// function 20 - show the highscore body content
+function showHightScoreBody(){
+    // build the score result body (function 21)
+    showHighScore();
+    // show the result body
+    viewHighScoreBody.setAttribute ("style", "display:block;");
+}
+
+// function 21 - load the highscore list to the body
+function showHighScore(){
+    // load the result from local storage
+    loadFromLocal();
+    // sort the array
+    
+}
