@@ -66,6 +66,15 @@ main .successResultMessage{
     color: rgb(90, 200, 90);
 }
 
+/* high score record styling */
+
+/* for high score table */
+
+.highscoreTable tbody tr:nth-of-type(odd){
+    background-color: #7952b3!important;
+    color : whitesmoke!important;
+}
+
 @media screen and (min-width: 600px){
 
 main #resultInput{

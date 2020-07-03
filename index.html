@@ -62,7 +62,7 @@
                                     <button id="startQuiz" class="btn btn-outline-primary">Start Quiz</button>
                                 </div>
                                 <div class="col-12 pb-3 text-center justify-content-center col-md-6">
-                                    <button class="highScore btn btn-outline-primary">View Highscore</button>
+                                    <button id="highScorePageBtnMain" class="btn btn-outline-primary">View Highscore</button>
                                 </div>
                             </div>
                         </div>
@@ -72,17 +72,17 @@
         </div>
         <!-- question body -->
         <div id = "questionBody" class="container pt-5 mt-md-5">
-            <!-- 4th row (1st row of question body) -->
+            <!-- 1th row -->
             <div class="row">
                 <div class="col-12 offset-md-2 col-md-8 text-left">
                     <h1 id ="questionNum" class="display-4"> 
                     </h1>
-                    <!-- 5th row (2nd row of question body // nested inside 4th row) -->
+                    <!-- 2th row  (nested inside 1th row) -->
                     <div class="row pt-3 ">
                         <div class="col-12 text-left justify-content-center">
                             <p  id = "questionTitle" class="pb-3">
                             </p>
-                            <!-- 6th row (3rd row of question body // nested inside 5th row) -->
+                            <!-- 3th row (nested inside 2th row) -->
                             <div class="row">
                                 <div class="col-12 pb-3 justify-content-start">
                                     <ul id="choiceList">
@@ -91,10 +91,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 7th row (nested inside 4th row) -->
+                    <!-- 4th row (nested inside 2th row) -->
                     <div class = "row">
                         <div class="col-12 pb-3 text-right">
-                            <button class="highScore btn btn-outline-primary">View Highscore</button>
+                            <button id ="highScorePageBtnChoice" class="btn btn-outline-primary">View Highscore</button>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,18 @@
                     <!-- 2nd row (nested inside 1st row)-->
                     <div class="row pt-3 ">
                         <div class="col-12 text-center justify-content-center text-justify">
-                            <ul id="highscoreList" class="pb-3"></ul>
+                            <!-- <ul id="highscoreList" class="pb-3"></ul> -->
+                            <table class="highscoreTable table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">Player initial</th>
+                                    <th scope="col">Score</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="highscoreTableBody">
+                                </tbody>
+                              </table>
                             <!-- 3rd row (nested inside 2nd row) -->
                             <div class="row">
                                 <div class="col-12 pb-3 text-center justify-content-center col-md-6">
