@@ -93,8 +93,10 @@ function hideQuestionBody(){
 function startQuiz(){
     // hide the landing page (function 2)
     hideMainBody();
+    // generate the question from random (questionScript - function 1)
+    generateQuestion();
     // set the countdown time (test)
-    secondLeft = 10;
+    secondLeft = 75;
     // start the countdown (function 8)
     countSecondLeft();
     // set time interval for every 1 sec to run function 8 once 
@@ -145,7 +147,7 @@ function resetQuestion(){
 
 // function 6 - bulid in the content to the question
 function questionBuilder(questionCount){
-    if (questionCount<5){
+    if (questionCount<numOfQuestion){
         // add the question number on the question heading
         questionNum.textContent = "Question " + (questionCount+1);
         // add the question title content
@@ -168,15 +170,19 @@ function questionBuilder(questionCount){
 function chooseAns(){
     var userChoice = event.target.textContent;
     var correctAns = questions[currentQues].answer;
+    var correctSound = document.getElementById("correctAnsAudio");
+    var wrongSound = document.getElementById("wrongAnsAudio");
     // if the selection from user same as the correct answer
     if (userChoice === correctAns){
             feedback.textContent = "Correct"
+            correctSound.play();
             // run the feedback function (function 10)
             returnFeedback();
             return;
     }
     else {
             feedback.textContent = "Wrong! The correct answer is " + questions[currentQues].answer;
+            wrongSound.play();
             // run the feedback function (function 10)
             returnFeedback();
             // reduce the time with 10 seconds
@@ -189,7 +195,7 @@ function countSecondLeft (){
     secondLeft--;
     timer.textContent = "Time : " + Math.max(0,secondLeft);
     // when time is up or no more question
-    if (secondLeft <= 0 || currentQues>4){
+    if (secondLeft <= 0 || currentQues>(numOfQuestion-1)){
         // clear interval - stop counting down
         clearInterval(timeInterval);
         // hide the question body (function 0)
@@ -281,9 +287,9 @@ function loadFromLocal(){
     var storedResult = JSON.parse(localStorage.getItem("playerResultArray"));
     if (storedResult !== null) {
         playerResultArray = storedResult;
-
     }
 }
+
 
 // function 18 - get the initial from the player
 function getPlayerInitial(){
@@ -356,6 +362,15 @@ function showHighScoreList(){
     hidetimer();
     // load the result from local storage (function 17)
     loadFromLocal();
+    // reset the attribute for the clear High score button to remain the original color setting
+    if (playerResultArray.length !==0){
+        console.log("positive is running")
+        clearRecord.setAttribute("class","btn btn-outline-primary");
+    }   
+    else{
+        console.log("negative is running")
+        clearRecord.setAttribute("class","clearRecordCSS btn btn-outline-primary");
+    }
     // sort the array
     playerResultArray.sort(function(a,b){return b.playerScore - a.playerScore})
     // list out the highscorer from the array data
@@ -390,6 +405,7 @@ function addHighScoreListererToMain(){
     var goBack = document.getElementById("goBack");
     // locate the clear result button (button) 
     var clearRecord = document.getElementById("clearRecord");
+    // set the click event as go back to main page
     goBack.addEventListener("click", initpage);
     clearRecord.addEventListener("click", clearHighScoreHistory);
 }
@@ -397,6 +413,10 @@ function addHighScoreListererToMain(){
 // function 23 - clear the past history and redisplay the list
 function clearHighScoreHistory(){
     event.preventDefault();
+    // set another attribute for change the focus status of the clear High score button
+    setTimeout(function(){
+        clearRecord.setAttribute("class","clearRecordCSS btn btn-outline-primary");
+    },200);
     // load the data from local storage (function 17)
     loadFromLocal();
     // set the array as empty
@@ -405,6 +425,8 @@ function clearHighScoreHistory(){
     saveToLocal();
     // re-render the high score table
     showHighScoreList();
+    // remove the event listener
+    clearRecord.removeEventListener("click", clearHighScoreHistory);
 }
 
 // fuction 24 - hide the timer

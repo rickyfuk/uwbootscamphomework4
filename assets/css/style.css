@@ -47,6 +47,13 @@ main .btn-outline-primary:focus{
     background-color: #7952b3!important;
 }
 
+main .clearRecordCSS.btn-outline-primary:focus{
+    box-shadow:none!important;
+    color:#fff!important;
+    border-color: #7952b344!important;
+    background-color: #7952b344!important;
+}
+
 main .userChoice{
     text-align: justify;
     width:100%;
