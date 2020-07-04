@@ -362,15 +362,6 @@ function showHighScoreList(){
     hidetimer();
     // load the result from local storage (function 17)
     loadFromLocal();
-    // reset the attribute for the clear High score button to remain the original color setting
-    if (playerResultArray.length !==0){
-        console.log("positive is running")
-        clearRecord.setAttribute("class","btn btn-outline-primary");
-    }   
-    else{
-        console.log("negative is running")
-        clearRecord.setAttribute("class","clearRecordCSS btn btn-outline-primary");
-    }
     // sort the array
     playerResultArray.sort(function(a,b){return b.playerScore - a.playerScore})
     // list out the highscorer from the array data
@@ -407,16 +398,15 @@ function addHighScoreListererToMain(){
     var clearRecord = document.getElementById("clearRecord");
     // set the click event as go back to main page
     goBack.addEventListener("click", initpage);
-    clearRecord.addEventListener("click", clearHighScoreHistory);
+    clearRecord.addEventListener("mousedown", clearHighScoreHistory);
+    clearRecord.addEventListener("mouseup", function blurInput() {
+        document.getElementById('clearRecord').blur();
+      });
 }
 
 // function 23 - clear the past history and redisplay the list
 function clearHighScoreHistory(){
     event.preventDefault();
-    // set another attribute for change the focus status of the clear High score button
-    setTimeout(function(){
-        clearRecord.setAttribute("class","clearRecordCSS btn btn-outline-primary");
-    },200);
     // load the data from local storage (function 17)
     loadFromLocal();
     // set the array as empty
@@ -426,7 +416,7 @@ function clearHighScoreHistory(){
     // re-render the high score table
     showHighScoreList();
     // remove the event listener
-    clearRecord.removeEventListener("click", clearHighScoreHistory);
+    clearRecord.removeEventListener("mousedown", clearHighScoreHistory);
 }
 
 // fuction 24 - hide the timer

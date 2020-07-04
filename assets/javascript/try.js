@@ -67,13 +67,8 @@ var questionsPool = [
     }
 ]
 
-// var questions = [];
 var numOfQuestion = 5; 
 var tempNumArray = [];
-
-var trytry = document.getElementById("trytry");
-console.log(trytry);
-trytry.addEventListener("click",generateQuestion);
 
 // function 0 - generate a random number
 function getRandomInt(max) {
@@ -100,8 +95,6 @@ function generateQuestion(){
   for (var i=0; i<numOfQuestion;i++){
     questions[i] = questionsPool[tempNumArray[i]];
   }
-  console.log(questions);
-  console.log(questionsPool);
   tempNumArray=[];
 }
 
