@@ -106,6 +106,6 @@ main .successResultMessage{
 /* for result input */
 main #resultInput{
     display: inline!important;
-    width:70%!important;
-}    
+    width: 70%!important;
+    }    
 }
