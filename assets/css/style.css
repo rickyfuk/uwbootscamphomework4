@@ -25,7 +25,10 @@ main h1{
 main .btn-outline-primary{
     color:#7952b3!important;
     border-color: #7952b3!important;
+}
 
+#initialBody .btn-outline-primary{
+    width:100%;
 }
 
 main .btn-outline-primary:hover{
@@ -59,6 +62,7 @@ main .userChoice{
     width:100%;
 }
 
+
 /* Score body styling */
 main #resultMessage{
     font-style: italic;
@@ -76,14 +80,30 @@ main .successResultMessage{
 /* high score record styling */
 
 /* for high score table */
-
 .highscoreTable tbody tr:nth-of-type(odd){
     background-color: #7952b3!important;
     color : whitesmoke!important;
 }
 
+/* for main menu */
+.mainMenuHead {
+    background-color: #7952b3!important;
+    color : whitesmoke!important;
+    border-radius: 12px;
+}
+
+#mainMenu .btn{
+    width:100%!important;
+    min-height: 3.5rem!important;
+    line-height: 3rem!important;
+    font-size: 1.5rem!important;
+    border-radius: 12px;
+} 
+
+/* for med or above screen */
 @media screen and (min-width: 600px){
 
+/* for result input */
 main #resultInput{
     display: inline!important;
     width:70%!important;

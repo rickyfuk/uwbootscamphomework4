@@ -76,7 +76,7 @@ function getRandomInt(max) {
 return Math.floor(Math.random() * Math.floor(max));
 };
 
-// function 2 - random 5 non-repetitive number between 0 to the max number of question
+// function 1 - random 5 non-repetitive number between 0 to the max number of question
 function generateNonRepNum(){
 for  (var i=0;i<numOfQuestion;i++){
   var tempNum = getRandomInt(questionsPool.length);
@@ -89,7 +89,7 @@ for  (var i=0;i<numOfQuestion;i++){
 } 
 }
 
-// function 1 - generate the questions from questions pool
+// function 2 - generate the questions from questions pool
 function generateQuestion(){
   questions = [];
   generateNonRepNum();

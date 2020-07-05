@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascript Code Quiz</title>
+    <title>Web Developer Quiz</title>
     <!-- CSS reset -->
     <link rel="stylesheet" type="text/CSS" href="assets/css/reset.css">
     <!-- BootstrapCDN -->
@@ -30,148 +30,40 @@
     <header>
         <div class="container mx-0">
             <div class="py-3 row">
-                <div class="col-12 my-auto text-center pd-3 col-md-8 text-md-left pb-md-0">
+                <div class="col-12 my-auto text-center pd-3 text-md-left">
                     <h1 class="display-4">
                         Web Developer Knowledge Quiz
                     </h1>
                 </div>
-                <div id = "timer" class="display-4 my-auto pr-5 col-12 text-center col-md-4 text-md-right">
-                    Time : 0
-                </div>   
             </div>
         </div>
     </header>
     <main>
-        <!-- landing page body -->
-        <div id = "initialBody" class="container pt-5 mt-md-5" >
+        <div id="mainMenu" class="container text-center mx-0 mx-auto pt-5">
             <!-- 1st row -->
             <div class="row">
-                <div class="col-12 offset-md-2 col-md-8 text-center">
-                    <h1 class="display-4">
-                        Coding Quiz Challenge
+                <div class="col-12 my-auto text-center offset-md-1 col-md-10 text-md-left offset-lg-2 col-lg-8">
+                    <h1 class="mainMenuHead display-4 py-3 pl-md-4">
+                        Choose a topic
                     </h1>
-                    <!-- 2nd row (nested inside 1st row)-->
-                    <div class="row pt-3 ">
-                        <div class="col-12 text-center justify-content-center text-justify">
-                            <p class="pb-3">
-                               Try to answer the following code-related question within the time limit. Keep in mind that incorrect answer will be penalize your score/time by ten seconds!
-                            </p>
-                            <!-- 3rd row (nested inside 2nd row) -->
-                            <div class="row">
-                                <div class="col-12 pb-3 text-center justify-content-center col-md-6">
-                                    <button id="startQuiz" class="btn btn-outline-primary">Start Quiz</button>
-                                </div>
-                                <div class="col-12 pb-3 text-center justify-content-center col-md-6">
-                                    <button id="highScorePageBtnMain" class="btn btn-outline-primary">View Highscore</button>
-                                </div>
-                            </div>
+                    <!-- 2rd row (nested inside 1nd row) -->
+                    <div class="row">
+                        <div class="col-12 pb-3 text-center align-middle justify-content-center col-md-6">
+                            <a role="button" class="display-4 py-auto btn btn-outline-primary" href="javascriptQuiz.html">Javascript</a>
+                        </div>
+                        <div class="col-12 pb-3 text-center align-middle justify-content-center col-md-6">
+                            <a role="button" class="display-4 py-auto btn btn-outline-primary" href="cssQuiz.html">CSS</a>
+                        </div>
+                    </div>
+                    <!-- 3rd row (nested inside 1nd row) -->
+                    <div class="row">
+                        <div class="col-12 pb-3 text-center align-middle justify-content-center col-md-6">
+                            <a role="button" class="display-4 py-auto btn btn-outline-primary" href="htmlQuiz.html">HTML</a>
+                        </div>
+                        <div class="col-12 pb-3 text-center align-middle justify-content-center col-md-6">
+                            <a role="button" class="display-4 py-auto btn btn-outline-primary" href=>Bootstrap</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- question body -->
-        <div id = "questionBody" class="container pt-5 mt-md-5">
-            <!-- 1th row -->
-            <div class="row">
-                <div class="col-12 offset-md-2 col-md-8 text-left">
-                    <h1 id ="questionNum" class="display-4"> 
-                    </h1>
-                    <!-- 2th row  (nested inside 1th row) -->
-                    <div class="row pt-3 ">
-                        <div class="col-12 text-left justify-content-center">
-                            <p  id = "questionTitle" class="pb-3">
-                            </p>
-                            <!-- 3th row (nested inside 2th row) -->
-                            <div class="row">
-                                <div class="col-12 pb-3 justify-content-start">
-                                    <ul id="choiceList">
-                                    </ul> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 4th row (nested inside 2th row) -->
-                    <div class = "row">
-                        <div class="col-12 pb-3 text-right">
-                            <button id ="highScorePageBtnChoice" class="btn btn-outline-primary">View Highscore</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Result body -->
-        <div id = "resultBody" class="container pt-5 mt-md-5" >
-            <!-- 1st row -->
-            <div class="row">
-                <div class="col-12 offset-md-2 col-md-8 text-center text-md-left">
-                    <h1 id="resultHead" class="display-4">
-                    </h1>
-                    <!-- 2nd row (nested inside 1st row)-->
-                    <div class="row pt-3 ">
-                        <div class="col-12 text-center justify-content-center text-md-left">
-                            <p id="resultMain" class="pb-3">
-                            </p>
-                            <!-- 3rd row (nested inside 2nd row) -->
-                            <div class="row">
-                                <div class="col-12 pb-3 text-left col-md-7 d-md-inline">
-                                    Enter initial 
-                                    <input type="text" id="resultInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g. JJ (for Jane Joe)">
-                                    <div id="resultMessage"></div>
-                                </div>  
-                                <div class="col-12 pb-3 text-center justify-content-center mx-md-0 px-md-2 col-md-2">
-                                    <button id="resultSubmit" class="btn btn-outline-primary">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- View Highscore body -->
-        <div id = "viewHighScoreBody" class="container pt-5 mt-md-5" >
-            <!-- 1st row -->
-            <div class="row">
-                <div class="col-12 offset-md-2 col-md-8 text-center">
-                    <h1 class="display-4">
-                        Highest Score
-                    </h1>
-                    <!-- 2nd row (nested inside 1st row)-->
-                    <div class="row pt-3 ">
-                        <div class="col-12 text-center justify-content-center text-justify">
-                            <!-- <ul id="highscoreList" class="pb-3"></ul> -->
-                            <table class="highscoreTable table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Rank</th>
-                                    <th scope="col">Player initial</th>
-                                    <th scope="col">Score</th>
-                                  </tr>
-                                </thead>
-                                <tbody id="highscoreTableBody">
-                                </tbody>
-                              </table>
-                            <!-- 3rd row (nested inside 2nd row) -->
-                            <div class="row">
-                                <div class="col-12 pb-3 text-center justify-content-center col-md-6">
-                                    <button id="goBack" class="btn btn-outline-primary">Go Back</button>
-                                </div>
-                                <div class="col-12 pb-3 text-center justify-content-center col-md-6">
-                                    <button id="clearRecord" class="btn btn-outline-primary">Clear Highest score</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-<audio id="correctAnsAudio"><source src="assets/audio/Interface-beep-up-sound-effect.mp3"></audio>
-    <audio id="wrongAnsAudio"><source src="assets/audio/Fail-sound.mp3"></audio>
-<script src="./assets/javascript/questionScript.js"></script>
-<script src="./assets/javascript/main.js"></script>
-
-
-    
-</body>
-</html>
