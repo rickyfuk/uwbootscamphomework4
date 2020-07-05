@@ -46,39 +46,49 @@ This project consists of the following 4 parts:
     |  jsquestionPool.js   |   store and generate the questions for quiz  | Javascript  |
     |  javascriptlocalStroage.js   |   the fuction to save and load the highscore list | Javascript  |
 
-Please visit [https://rickyfuk.github.io/uwbootscamphomework3/](https://rickyfuk.github.io/uwbootscamphomework3/) for the site.
+Please visit [https://rickyfuk.github.io/uwbootscamphomework4/](https://rickyfuk.github.io/uwbootscamphomework4/) for the site.
 
 For the feature of the site, please visit the [Features](#features) section for more details.
 
 # Screenshots
-![screenshot](https://github.com/rickyfuk/uwbootscamphomework3/blob/master/assets/image/passwordGeneratorScreenshot.PNG?raw=true)
+![screenshot](https://github.com/rickyfuk/uwbootscamphomework4/blob/master/assets/image/screenshot.PNG?raw=true)
 
 # Features
 In this project, the following features have apply to the site:
 
 1. Favicon have been added for the page
-2. A password will be generated and display on the password box once the "Password Generator" button is clicked and the folloing questions are answered
-   1. How many characters do you need? (must between 8 to 128 characters) 
-      * The generator will stop working if the answer is not a number or not between 8 to 128
-   2. Does your password need any number? 
-   3. Does your password need any capatial letter?
-   4. Does your password need any lower case letter?
-   5. Does your password need any special character?
-      * For question 2-5, the questions will pop up in a "OK/Cancel" box. ("OK" means yes // "Cancel" means no) 
-3. The password will be copied in clipboard once the "Copy to Clipboard" button is clicked
-4. The title "Generate A Password" will be change according to screen size as the table below:
+2. 4 Different Quizes for the player to choose:
+   1. Javascript
+   2. CSS
+   3. HTML
+   4. Bootstrap
+   Player can choose the quiz by clikcing the button
+3. The player can have the following 3 options after they enter the landing page of the quiz
+   1. "Start Quiz" - go ahead to start the quiz
+   2. "View Highscore" - go to highscore page for the highscore table
+   3. "Main Menu" - return to the main menu for the Quiz options
    
+    Note : The button will change the layout regarding to the following screensize
+
     |   Screen Size   |          Layout           |
     |   :----------:    |   :-----------------------:  |
-    |   Below Med   |   Center of the Generator   |
-    |   Equal or Above Med   |   Left side of the generator   |
+    |   Below Large   |   The buttons stack vertically   |
+    |   Equal or Above Large   |   The button stack horizontally  |
 
-5.  The button layout will be change according to screen size as the table below:
-   
-    | Screen Size  |               Layout               |
-    | :----------: | :--------------------------------: |
-    |  Below Med   |   Two buttons stack vertically   |
-    |   Equal or Above Med   |   Two buttons lays horizontally   |
+4. When the player choose the answer, the following features will 
+   1. A sound effect will come with the correct or wrong answer after the player pick an answer
+
+   2.  The following message will appear under the choice after the player pick an answer
+       * "Correct" - when the answer is True
+       * "Wrong! The correct answer is XXXXX " - when the answer is False (XXXXX indicate the right answer)
+
+5. A "View Highscore" button located on the right bottom of the page - player can visit the Highscore table at anytime during the quiz and the quiz will stop
+6. An "All Done" message will pop up after all question is answered
+    <div>
+    <img src="https://github.com/rickyfuk/uwbootscamphomework3/blob/master/assets/image/Captureofdescription.PNG?raw=true" alt="All Done Message sample">
+    *example for the "All Done" message*
+    </div>
+
 
 # Code Style
 Standard
@@ -97,11 +107,7 @@ The following technology have been used for this project:
   1. HTML
   2. CSS
   3. Bootstrap (Version 4.5)
-  4. Google font
-        * Encode Sans Expanded
-        * Questrial
-        * Cousine
-  5. JavaScript
+  4. JavaScript
 
 # Code Example
 Below are some example for the code has been used and the corresponding outcome:
