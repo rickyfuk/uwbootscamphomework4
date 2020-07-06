@@ -11,6 +11,7 @@ Homework 4 - Code Quiz
   - [<span style="color: rgb(220, 105, 1);"> Description for the code</span>](#description-for-the-code)
 - [Technology](#technology)
 - [Code Example](#code-example)
+- [Credit](#credit)
 - [Test](#test)
 - [Status](#status)
 - [Future Plan](#future-plan)
@@ -75,20 +76,30 @@ In this project, the following features have apply to the site:
     |   Below Large   |   The buttons stack vertically   |
     |   Equal or Above Large   |   The button stack horizontally  |
 
-4. When the player choose the answer, the following features will 
-   1. A sound effect will come with the correct or wrong answer after the player pick an answer
 
-   2.  The following message will appear under the choice after the player pick an answer
+4. When the player enter the quiz, 75 seconds will be allow for the player to answer 5 questions.
+5. When the player choose the answer, the following features will come with the answer
+   1. The time will reduce 10 seconds if the answer is wrong
+   2. A sound effect will come with the correct or wrong answer after the player pick an answer
+   3.  The following message will appear under the choice after the player pick an answer
        * "Correct" - when the answer is True
        * "Wrong! The correct answer is XXXXX " - when the answer is False (XXXXX indicate the right answer)
 
-5. A "View Highscore" button located on the right bottom of the page - player can visit the Highscore table at anytime during the quiz and the quiz will stop
-6. An "All Done" message will pop up after all question is answered
-    <div>
-    <img src="https://github.com/rickyfuk/uwbootscamphomework3/blob/master/assets/image/Captureofdescription.PNG?raw=true" alt="All Done Message sample">
-    *example for the "All Done" message*
-    </div>
+6. A "View Highscore" button located on the right bottom of the page - player can visit the Highscore table at anytime during the quiz and the quiz will stop
+   
+7. An "All Done" message will pop up after all question is answered
+    ![alldone](assets/image/alldone.png)
+   otherwise, a "Time Up" message will pop up if the allowed time is over (i.e. 75 seconds in this setup) 
+    ![timeup](assets/image/timeup.png)
 
+8.  The player have to entered at least one character for their initial in an input box in order to submit their initial to the highscore database. 
+   * A message "Thanks for playing" will appear under the input box
+    ![success](assets/image/success.png)
+    * A message "Please input your initial" will appear under the input box if the player did not enter any character and press "Submit" button  
+    ![errormessage](assets/image/errormessage.png) 
+9.  The player can remove the highscore record by clicking the "Clear Highest score"
+10. The player can return to the quiz main body (quiz landing page)
+    
 
 # Code Style
 Standard
@@ -97,9 +108,26 @@ Standard
 A general description for the every section on the top of the code to breifly explain the puopose of that section and some note for the section details.
 
   <div>
-  <img src="https://github.com/rickyfuk/uwbootscamphomework3/blob/master/assets/image/Captureofdescription.PNG?raw=true" alt="Description Example">
-  *example for the section description*
+  <img src="assets/image/descriptionexample.png" alt="Description Example">
+   *example for the section description*
   </div>
+
+For easier reference, the location of the function will place inside its description
+ ![functionlocation](assets/image/functionlocation.png) 
+
+ * From the above example, this means that the location of the function is located in the part "qJS 8" insdie "questionJS.js" file
+ 
+ 
+ * If the function located in the same js file, no prefix (i.e. questionJS in this example) will be shown
+ ![functionlocation2](assets/image/functionlocation2.png) 
+
+
+ * For function "saveToLocal" and "loadFromLocal", 4 different js file have been used for 4 different local storage location
+      1. javascript - jsplayerResultArray
+      2. css - cssplayerResultArray
+      3. html - htmlplayerResultArray
+      4. bootstrap - bsplayerResultArray    
+
 
 # Technology
 The following technology have been used for this project:
@@ -112,49 +140,58 @@ The following technology have been used for this project:
 # Code Example
 Below are some example for the code has been used and the corresponding outcome:
 
-1. A if statement to exclude the undesired result: (below is the example for the question for the number character requirment according to the user requirment)
+1. To hide or show the content of different body parts, "setAttribute" with "style" and "display:none" or "display:block" has been used.
     ```Javascript
-            if(isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128) {
-                alert("Please enter a number between 8 to 128 only"); 
-                return;
-            }
+            // hide a part
+             mainBody.setAttribute ("style", "display:none;");
+            // show a part
+             mainBody.setAttribute ("style", "display:block;");
     ```
-2. A function for generating a random number while generating a password:
-   * An arguement "max" must be included while the function executed
+2. To add a sound effect for the player choice with right or wrong response, the sound track has embedded into the html file and the execution script has placed in the questionJS javascript file.
+   * The embed code in html
+   ```html
+    <!-- the sound effect link  -->
+    <audio id="correctAnsAudio"><source src="assets/audio/Interface-beep-up-sound-effect.mp3"></audio>
+    <audio id="wrongAnsAudio"><source src="assets/audio/Fail-sound.mp3"></audio>
+   ``` 
+   * The script to run the sound track   
     ```Javascript
-        function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-    };
+         // play correct sound effect
+            correctSound.play();
+        // play wrong sound effect
+            wrongSound.play();
     ```
-3.  Clear previous result function will be executed before the rest of the function to generate the password is being run.
-    * "passwordArray" is an array to store every character that generated by a random fuction
-    * "password" is the string for returning all the character from "passwordArray"
-    * "fullChatArray" is the array to keep all the characters where the user selected from any of the following four character type: 
-        1. Number
-        2. Capital Letter
-        3. Lowercase Letter
-        4. Special Character
+3.  Some function use setTimeout function to delay the execute time in order to let the player to read the response,
     ```Javascript
-        function clearPreviousResult(){
-        passwordArray = [];
-        password = "";
-        fullChatArray = []; 
-       }
+        // wait for half second and do the following action:
+        // 1. hide the result body
+        // 2. show high score body
+        // 3. reset the input value and message to null
+        setTimeout(function(){
+            // hide the result body (function sRJS 5)
+            hideResultBody();
+            // show high score body (viewHighscoreJS - function vHJS 5)
+            showHighScoreBody();
+            // reset the result input as empty
+            resultInput.value = ""; 
+            // reset the resultMessage
+            resultMessage.textContent =""; 
+        },500); 
+        } 
     ```
-4. To get the response from html and return the result, "getElementbyId" and "addEventListener" have been used:
-   (In the html code, the id has been allocated with the button)
+4. As the chorme default setting, the "Clear Highest score" button will stay in focus status after it has been clicked. To fix this issue, "mousedown" and "mouseup" have been used instead of "click" 
    ```Javascript
-   // To execute command for "Generate Password" button
-    document.getElementById("btnforpassword").addEventListener("click",displayTheResult);
-    // To execute command for "Copy to Clipboard" button 
-    document.getElementById("btnforclipboard").addEventListener("click",copyToClipboard); 
+   // set the click event to execute the clearHighScoreHistory function (function vHJS 3)
+        // Note : the button will stay in focus status after click when it is a click function (due to chrome default features)
+        // the walkaround is using mousedown and mouseup
+    clearRecord.addEventListener("mousedown", clearHighScoreHistory);
+    clearRecord.addEventListener("mouseup", function blurInput() {
+        document.getElementById('clearRecord').blur();
+      });
     ```
-    ```html
-    <button class="btn btn-primary px-4 py-2" id="btnforpassword">Generate Password</button>
-
-    <button class="btn btn-primary px-4 py-2" id="btnforclipboard">Copy to clipboard</button>
-    ```
-
+# Credit
+For the sound track, please allow me to give the credit to Alexander who is the artist of these free sound tracks owner. Details could refer to [Orange Free Sound](http://www.orangefreesounds.com/)
+ 
 # Test
 1. The site have been tested by open with small/medium/large device respectively.
 2. The site have been tested by a HTML validation service - [W3C](https://validator.w3.org/)
@@ -165,8 +202,8 @@ Project status: finished
 # Future Plan
 
 Plan for the future development of this site:
-1. Add the password setup section under the generation instead of prompting the question
-2. Add the list of past 10 previous password genterated by this generator 
+1. Add the option page allow the user to change the time, number of question and color setting
+2. Add an database page for the user to make the changes for the question content   
 
 # Create By
 Created by Chung Hei Fuk
