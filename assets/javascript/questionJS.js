@@ -54,27 +54,31 @@ function questionBuilder(questionCount){
 
 // function qJS 5 - find the user choice and check if it is correct
 function chooseAns(){
+    var userChoiceEle = event.target;
     var userChoice = event.target.textContent;
     var correctAns = questions[currentQues].answer;
     var correctSound = document.getElementById("correctAnsAudio");
     var wrongSound = document.getElementById("wrongAnsAudio");
-    // if the selection from user same as the correct answer
-    if (userChoice === correctAns){
-            feedback.textContent = "Correct"
-            // play correct sound effect
-            correctSound.play();
-            // run the feedback function (function qJS 7)
-            returnFeedback();
-            return;
-    }
-    else {
-            feedback.textContent = "Wrong! The correct answer is " + questions[currentQues].answer;
-            // play wrong sound effect
-            wrongSound.play();
-            // run the feedback function (function qJS 7)
-            returnFeedback();
-            // reduce the time with 10 seconds
-            return secondLeft -= 10; 
+    // only run when the user select the list item
+    if(userChoiceEle.matches("button") === true){
+        // if the selection from user same as the correct answer
+        if (userChoice === correctAns){
+                feedback.textContent = "Correct"
+                // play correct sound effect
+                correctSound.play();
+                // run the feedback function (function qJS 7)
+                returnFeedback();
+                return;
+        }
+        else {
+                feedback.textContent = "Wrong! The correct answer is " + questions[currentQues].answer;
+                // play wrong sound effect
+                wrongSound.play();
+                // run the feedback function (function qJS 7)
+                returnFeedback();
+                // reduce the time with 10 seconds
+                return secondLeft -= 10; 
+        }
     }
 }
 
